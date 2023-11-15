@@ -1,26 +1,30 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { TareasMostrar } from "./mostrar/TareasMostrar";
 import { TareasAgregarEditar } from "./agregarEditar/TareasAgregarEditar";
 import { Box, Paper } from "@mui/material";
 import { TareasVaciarLista } from "./vaciar/TareasVaciarLista";
+import { TareasFiltro } from "./filtro/TareasFiltro";
+import { useTask } from "@/context/TaskContext";
 
 export const TareasPage = () => {
+  const [taskList, setTaskList] = useState([]);
+  const { obtenerTareas, tasks } = useTask();
+
+  useEffect(() => {
+    obtenerTareas();
+  }, []);
+
+  useEffect(() => {
+    setTaskList(tasks);
+  }, [tasks]);
   return (
     <Box sx={{ height: "90vh" }}>
-      <Box
-        sx={{
-          margin: "10px",
-          paddingTop: "5px",
-          height: "78vh",
-          flex: 1,
-          overflowY: "scroll",
-          "&::-webkit-scrollbar": {
-            width: "4px",
-            display: "none" /* Ocultar scroll */,
-          },
-        }}
-      >
-        <TareasMostrar />
+      <Box>
+        <TareasFiltro tasks={tasks} setTaskList={setTaskList} />
+      </Box>
+      <Box>
+        <TareasMostrar taskList={taskList}   />
       </Box>
       <Box sx={{ position: "fixed", bottom: 10, width: "100%" }}>
         <Box
