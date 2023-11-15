@@ -16,7 +16,6 @@ const GET = async () => {
 const POST = async (request) => {
   try {
     const reqBody = await request.json();
-    console.log(reqBody);
     const { title, description } = reqBody;
     let authorId = "65384193e4300013d8557048";
 

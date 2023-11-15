@@ -20,6 +20,18 @@ const fontOregano = Oregano({
   subsets: ["latin"],
 });
 
+const iconBtnEditStyled = {
+  backgroundColor: "#f39f5a",
+  color: "white",
+  "&:hover": {
+    transform: "scale(1.2)",
+    backgroundColor: "#f39f5a",
+    color: "white",
+  },
+};
+
+const iconBtnAddStyled = {};
+
 export const TareasAgregarEditar = ({ task, editarTareas }) => {
   const [open, setOpen] = useState(false);
   const initialValues = { description: "", title: "" };
@@ -32,7 +44,17 @@ export const TareasAgregarEditar = ({ task, editarTareas }) => {
   };
   const handleInputChange = (e) => {
     const { value, name } = e.target;
-    setValues({ ...values, [name]: value });
+
+    if (
+      (name == "description" && value.length <= 120) ||
+      (name == "title" && value.length <= 50)
+    ) {
+      setValues({ ...values, [name]: value });
+    }
+  };
+
+  const handleClear = () => {
+    setValues(initialValues);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +76,11 @@ export const TareasAgregarEditar = ({ task, editarTareas }) => {
 
   return (
     <Box>
-      <IconButton onClick={() => setOpen(!open)}>
+      <IconButton
+        color="success"
+        sx={task ? iconBtnEditStyled : iconBtnAddStyled}
+        onClick={() => setOpen(!open)}
+      >
         {task ? <Edit /> : <AddIcon />}
       </IconButton>
       <Modal
@@ -64,8 +90,9 @@ export const TareasAgregarEditar = ({ task, editarTareas }) => {
       >
         <form onSubmit={handleSubmit}>
           <Paper
+          elevation={4}
             sx={{
-              width: "300px",
+              width: "350px",
               padding: "10px",
               display: "grid",
               rowGap: "15px",
@@ -87,6 +114,8 @@ export const TareasAgregarEditar = ({ task, editarTareas }) => {
                 required
                 label="Titulo"
                 name="title"
+                multiline
+                rows={2}
                 value={values.title}
                 onChange={handleInputChange}
               />
@@ -94,9 +123,17 @@ export const TareasAgregarEditar = ({ task, editarTareas }) => {
                 required
                 label="Descripcion"
                 name="description"
+                multiline
+                rows={4}
                 value={values.description}
                 onChange={handleInputChange}
               />
+              <Typography
+                sx={{ display: "flex", justifyContent: "flex-end" }}
+                fontSize={"small"}
+              >
+                Caracteres restantes {120 - values?.description.length}
+              </Typography>
             </Box>
             <Box
               sx={{ display: "flex", justifyContent: "center", gap: "10px" }}
@@ -104,12 +141,15 @@ export const TareasAgregarEditar = ({ task, editarTareas }) => {
               <Button type="submit" variant="contained" color="success">
                 {task ? "Editar" : "Agregar"}
               </Button>
+              <Button onClick={handleClear} variant="contained" color="info">
+                Limpiar
+              </Button>
               <Button
                 onClick={handleModalClosed}
                 variant="contained"
                 color="warning"
               >
-                Cancelar
+                Finalizar
               </Button>
             </Box>
           </Paper>

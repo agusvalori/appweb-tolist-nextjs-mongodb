@@ -51,12 +51,17 @@ const TaskContextProvider = (props) => {
     });
 
     const { message, data } = await result.json();
-    obtenerTareas();
+    await obtenerTareas();
 
     return { data, message };
   };
 
-  const eliminarTareas = async () => {};
+  const eliminarTareas = async () => {
+    const result = await fetch(`../api/task`, { method: "DELETE" });
+    const { message, data } = await result.json();
+    await obtenerTareas();
+    return { message };
+  };
   const eliminarTareaById = async (task) => {
     const result = await fetch(`../api/task/${task._id}`, {
       method: "DELETE",

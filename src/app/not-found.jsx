@@ -1,32 +1,40 @@
-import { Box, Paper, Typography } from "@mui/material";
+"use client";
+import { Box, Button, Paper, Typography } from "@mui/material";
 import React from "react";
 import { Bangers } from "next/font/google";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 const fontBangers = Bangers({ weight: "400", subsets: ["latin"] });
 
-export const metadata = {
-  title: "No Se Encontro la pagina",
-  description: "Catalogo de articulos de descartablesde  myvdescartables",
-  keywords: ["tienda", "descartables", "catalogo"],
-};
-
 const NotFound = () => {
+  const router = useRouter();
+
+  const handleRouter = () => {
+    router.push("/");
+  };
   return (
     <Box
       sx={{
-        width: "99%",
-        height: "99%",
+        width: "100%",
+        height: "100%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
       }}
     >
-      <Paper elevation={4} sx={{ padding: "15px" }}>
+      <Paper
+        elevation={4}
+        sx={{
+          padding: "15px",
+          backgroundColor: `#301952`,
+          display: "grid",
+          gridTemplateRows: "200px 60px",
+        }}
+      >
         <Box>
           {" "}
           <Typography
-            color={"error"}
+            sx={{ color: "#e8bcb9" }}
             fontFamily={fontBangers.style}
             fontSize={100}
             component={"h1"}
@@ -35,15 +43,21 @@ const NotFound = () => {
             404
           </Typography>
           <Typography
-            color={"error"}
+            sx={{ color: "#e8bcb9" }}
             fontFamily={fontBangers.style}
             component={"p"}
           >
             No se encontro la pagina solicitada
           </Typography>
         </Box>
-        <Box sx={{ marginTop: "20px" }}>
-          <Link href={"/"}>Volver</Link>
+        <Box>
+          <Button
+            sx={{ color: "#f39f5a", boxShadow: "2px 2px 3px 3px" }}
+            variant="outlined"
+            onClick={handleRouter}
+          >
+            Volver
+          </Button>
         </Box>
       </Paper>
     </Box>
