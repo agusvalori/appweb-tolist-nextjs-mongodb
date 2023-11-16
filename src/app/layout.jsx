@@ -2,6 +2,9 @@ import { Box, Paper } from "@mui/material";
 import NavBar from "./NavBar";
 import "./global.css";
 import { TaskContextProvider } from "@/context/TaskContext";
+import { UserContextProvider } from "@/context/UserContext";
+import { SessionProvider } from "next-auth/react";
+import Providers from "./Providers";
 
 export const metadata = {
   title: "Tolist.js",
@@ -12,14 +15,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body>
-        <TaskContextProvider>
+        <Providers>
           <Box>
             <NavBar />
           </Box>
           <Paper
-          elevation={4}
+            elevation={4}
             sx={{
-              backgroundColor:`#451952`,
+              backgroundColor: `#451952`,
               margin: "10px",
               height: "85vh",
               flex: 1,
@@ -32,7 +35,7 @@ export default function RootLayout({ children }) {
           >
             {children}
           </Paper>
-        </TaskContextProvider>
+        </Providers>
       </body>
     </html>
   );

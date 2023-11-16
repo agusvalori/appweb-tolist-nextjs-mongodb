@@ -1,23 +1,15 @@
+import { connectDB } from "@/utils/connectDB";
 import { NextResponse } from "next/server";
 
 const GET = async () => {
-  //consultar bases de datos
-  const res = await fetch("https://dummyjson.com/users");
-
-  if (res.status === 200) {
-    const data = await res.json();
-    return NextResponse.json({ message: "Obteniendo datos", data: data.users });
-  } else {
-    return NextResponse.json({
-      message: "No se pudieron obtener usuarios",
-      data: null,
-    });
-  }
+  connectDB();
+  
+  return NextResponse.json({ message: "Obteniendo datos", data: data.users });
 };
 
 const POST = async (request) => {
   //consultar bases de datos
-  
+
   //const reqBody = await request.json();
   const { firstName } = await request.json();
   console.log(firstName);

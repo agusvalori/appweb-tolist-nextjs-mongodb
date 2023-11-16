@@ -31,7 +31,7 @@ const POST = async (request) => {
       return NextResponse.json(
         {
           message: `El valor '${
-            error?.keyValue?.title || ""
+            Object.keys(error?.keyValue)[0] || ""
           }' ya se encuentra guardado y no se puede duplicar`,
           data: null,
         },

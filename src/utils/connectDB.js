@@ -4,7 +4,9 @@ const conn = { isConnected: false };
 
 const connectDB = async () => {
   if (conn.isConnected) return;
-  const db = await connect(process.env.DATABASE_URL);
+  const { DATABASE_URL } = process.env;
+
+  const db = await connect(DATABASE_URL);
   conn.isConnected = db.connections[0].readyState;
   console.log("Base de datos conectada: ", db.connection.name);
 };
@@ -14,7 +16,10 @@ connection.on("connected", () => {
 });
 
 connection.on("error", (err) => {
-  console.log("Error al intentar conectar la base de datos conectada: ", err.message);
+  console.log(
+    "Error al intentar conectar la base de datos: ",
+    err.message
+  );
 });
 
 export { connectDB };

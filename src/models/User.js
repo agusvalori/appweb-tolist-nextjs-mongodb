@@ -13,19 +13,36 @@ const UserSchema = new Schema(
         "El nombre de usuario no puede tener más de 20 caracteres",
       ],
     },
-    password: { type: String, required: true, trim: true },
-    email: { type: String },
-    phone: { type: Number },
+    password: {
+      type: String,
+      required: [true, "La clave es requerida"],
+      trim: true,
+    },
+    email: {
+      type: String,
+      unique: [true, "El email esta duplicado, ingrese uno nuevo"],
+      required: [true, "El email es requerido"],
+      match: [
+        /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+        "El email no es valido",
+      ],
+    },
+    phone: {
+      type: Number,
+      sparse: true, // Permite que el campo sea ausente (no tenga índice)
+    },
     firstName: {
       type: String,
       maxlength: [30, "El nombre no puede tener más de 30 caracteres"],
+      sparse: true, // Permite que el campo sea ausente (no tenga índice)
     },
     lastName: {
       type: String,
       maxlength: [30, "El apellido no puede tener más de 30 caracteres"],
+      sparse: true, // Permite que el campo sea ausente (no tenga índice)
     },
-    avatar: {
-      avatar_url: String,
+    avatar_url: {
+      type: String,
     },
   },
   {
