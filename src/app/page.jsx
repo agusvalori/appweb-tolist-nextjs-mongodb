@@ -1,4 +1,5 @@
-import { InicioPage } from "@/pages/inicio/InicioPage";
+import { InicioPage } from "../pages/inicio/InicioPage";
+
 
 export const metadata = {
   title: "Inicio - Descartables",

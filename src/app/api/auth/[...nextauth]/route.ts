@@ -7,6 +7,7 @@ const handler = NextAuth({
   providers: [
     CredentialsProvider({
       name: "Credentials",
+      id: "credentials",
       credentials: {
         username: {
           label: "Username",
@@ -21,7 +22,7 @@ const handler = NextAuth({
       },
       async authorize(credentials, req) {
         await connectDB();
-        const { password, username } = credentials;
+        const { password, username } = credentials as any;
         const user = await User.findOne({ username: username });
         if (!user || user?.password !== password) {
           throw new Error("Credenciales invalidas");
@@ -31,20 +32,27 @@ const handler = NextAuth({
       },
     }),
   ],
-  callbacks: {
-    jwt({ account, token, user, profile, session, trigger }) {
-      //token.rol = "administrador";
 
+  callbacks: {
+    async jwt({ token, user }) {
       if (user) {
         token.user = user;
       }
-      console.log("jwt: ", { token });
       return token;
     },
-    session({ session, token }) {
-      session.user = token.user;
+    async session({ session, token }) {
+      session.user = token.user as any;
       return session;
     },
+  },
+
+  session: {
+    strategy: "jwt",
+  },
+
+  pages: {
+    signIn: "/auth/signin",
+    signOut: "/auth/signout",
   },
 });
 

@@ -1,9 +1,9 @@
 "use client";
 
-import { TaskContextProvider } from "@/context/TaskContext";
-import { UserContextProvider } from "@/context/UserContext";
 import { SessionProvider } from "next-auth/react";
 import React from "react";
+import { TaskContextProvider } from "../context/TaskContext";
+import { UserContextProvider } from "../context/UserContext";
 
 const Providers = ({ children }) => {
   return (

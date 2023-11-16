@@ -1,13 +1,11 @@
 import { NextResponse } from "next/server";
+import { User } from "../../../../models/User";
+import { connectDB } from "../../../../utils/connectDB";
 
-const { User } = require("@/models/User");
-const { connectDB } = require("@/utils/connectDB");
 
 const POST = async (request) => {
   try {
     const reqBody = await request.json();
-
-    console.log("reqBody: ", reqBody);
     if (!reqBody) {
       return NextResponse.json(
         {

@@ -1,9 +1,6 @@
 import { Box, Paper } from "@mui/material";
 import NavBar from "./NavBar";
 import "./global.css";
-import { TaskContextProvider } from "@/context/TaskContext";
-import { UserContextProvider } from "@/context/UserContext";
-import { SessionProvider } from "next-auth/react";
 import Providers from "./Providers";
 
 export const metadata = {

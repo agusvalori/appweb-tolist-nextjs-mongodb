@@ -23,7 +23,7 @@ const NavBar = () => {
   };
 
   return (
-    <AppBar position="static" color="transparent" >
+    <AppBar position="static" color="transparent">
       <Box
         sx={{
           width: "100%",
@@ -48,7 +48,9 @@ const NavBar = () => {
         </Box>
         <Box sx={{ position: "fixed", right: "0px" }}>
           <IconButton>
-            <AccountCircleRounded sx={{ color: "#f39f5a" }} />
+            <NextLink href={"/auth/signout"}>
+              <AccountCircleRounded sx={{ color: "#f39f5a" }} />
+            </NextLink>
           </IconButton>
         </Box>
       </Box>

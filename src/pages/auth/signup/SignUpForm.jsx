@@ -23,7 +23,7 @@ export const SignUpForm = () => {
   };
 
   const handleRouter = () => {
-    router.push("/auth/sigin");
+    router.push("/auth/signin");
   };
 
   const handleSubmit = async (e) => {
