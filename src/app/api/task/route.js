@@ -1,24 +1,36 @@
 import { Task } from "@/models/Task";
 import { connectDB } from "@/utils/connectDB";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
+import { getToken } from "next-auth/jwt";
+const secret = process.env.NEXTAUTH_SECRET;
 
-const GET = async () => {
-  //consultar bases de datos
-  connectDB();
-  const tasks = await Task.find();
-  console.log("obteniendo tareas: ", tasks.length);
+const GET = async (req) => {
+  // Conectarse a la base de datos
+  await connectDB();
+
+  // Obtener la sesión
+  const token = await getToken({ req, secret });
+  const userId = token?.user?._id || false;
+
+  // Consultar las tareas
+  const tasks = await Task.find({ authorId: userId });
   return NextResponse.json({
     message: "Obteniendo tareas",
     data: tasks,
   });
 };
 
-const POST = async (request) => {
+const POST = async (req) => {
   try {
-    const reqBody = await request.json();
+    //obtenemos los datos desde el cliente
+    const reqBody = await req.json();
     const { title, description } = reqBody;
-    let authorId = "65384193e4300013d8557048";
 
+    // Obtener la sesión
+    const token = await getToken({ req, secret });
+    const authorId = token?.user?._id || false;
+
+    //conectamos a la base de datos
     connectDB();
     const newTask = new Task({ title, description, authorId });
     const task = await newTask.save();
@@ -45,10 +57,14 @@ const POST = async (request) => {
   }
 };
 
-const DELETE = async () => {
+const DELETE = async (req) => {
+  // Obtener la sesión
+  const token = await getToken({ req, secret });
+  const userId = token?.user?._id || false;
+
   //consultar bases de datos
   connectDB();
-  const { deletedCount } = await Task.deleteMany();
+  const { deletedCount } = await Task.deleteMany({ authorId: userId });
   return NextResponse.json({
     message: `Se eliminaron ${deletedCount} tareas`,
     data: [{}],
