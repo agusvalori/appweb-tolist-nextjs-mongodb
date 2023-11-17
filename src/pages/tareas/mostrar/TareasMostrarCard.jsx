@@ -1,13 +1,6 @@
 import { useTask } from "@/context/TaskContext";
 import { Delete } from "@mui/icons-material";
-import {
-  Box,
-  Paper,
-  Typography,
-  Checkbox,
-  IconButton,
-  TextField,
-} from "@mui/material";
+import { Box, Paper, Typography, Checkbox, IconButton } from "@mui/material";
 import React from "react";
 import { TareasAgregarEditar } from "../agregarEditar/TareasAgregarEditar";
 import { Acme, Indie_Flower } from "next/font/google";
@@ -103,7 +96,7 @@ export const TareasMostrarCard = ({ task }) => {
             sx={{
               width: "250px",
               height: "90px",
-              textAlign: description.length<=32?"center":"",
+              textAlign: description.length <= 32 ? "center" : "",
               wordWrap: "break-word",
             }}
           >

@@ -44,14 +44,7 @@ const NavBar = () => {
         >
           <LinkStyled label={"Inicio"} path={"/"} />
           <LinkStyled label={"Tareas"} path={"/tareas"} />
-          <LinkStyled label={"Contacto"} path={"/contacto"} />
-        </Box>
-        <Box sx={{ position: "fixed", right: "0px" }}>
-          <IconButton>
-            <NextLink href={"/auth/signout"}>
-              <AccountCircleRounded sx={{ color: "#f39f5a" }} />
-            </NextLink>
-          </IconButton>
+          <LinkStyled label={"Perfil"} path={"/perfil"} />
         </Box>
       </Box>
     </AppBar>
