@@ -20,11 +20,9 @@ export const TareasPage = () => {
   }, [tasks]);
   return (
     <Box sx={{ height: "90vh" }}>
-      <Box>
+      <Box sx={{ paddingTop: "10px" }}>
         <TareasFiltro tasks={tasks} setTaskList={setTaskList} />
-      </Box>
-      <Box>
-        <TareasMostrar taskList={taskList}   />
+        <TareasMostrar taskList={taskList} />
       </Box>
       <Box sx={{ position: "fixed", bottom: 10, width: "100%" }}>
         <Box
@@ -36,8 +34,7 @@ export const TareasPage = () => {
             columnGap: "10px",
           }}
         >
-          <Paper
-            elevation={4}
+          <Box
             sx={{
               display: "grid",
               gridAutoFlow: "column",
@@ -49,7 +46,7 @@ export const TareasPage = () => {
           >
             <TareasAgregarEditar task={false} />
             <TareasVaciarLista />
-          </Paper>
+          </Box>
         </Box>
       </Box>
     </Box>

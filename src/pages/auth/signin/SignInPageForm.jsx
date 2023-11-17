@@ -16,7 +16,6 @@ export const SignInPageForm = () => {
     router.push("/auth/signup");
   };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { ok, error } = await signIn("credentials", {
@@ -27,9 +26,9 @@ export const SignInPageForm = () => {
     if (error) {
       return alert(error);
     }
-
-    return router.push("/");
+    router.push("/");
   };
+
   return (
     <Box component={"form"} onSubmit={handleSubmit}>
       <Box sx={{ display: "grid", rowGap: "10px" }}>

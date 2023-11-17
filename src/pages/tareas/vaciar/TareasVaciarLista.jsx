@@ -1,14 +1,7 @@
 "use client";
 import { useTask } from "@/context/TaskContext";
-import { Clear } from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  IconButton,
-  Modal,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { HighlightOff } from "@mui/icons-material";
+import { Box, Button, Modal, Paper, Typography } from "@mui/material";
 import React, { useState } from "react";
 
 export const TareasVaciarLista = () => {
@@ -25,9 +18,15 @@ export const TareasVaciarLista = () => {
   };
   return (
     <div>
-      <IconButton onClick={() => setOpen(!open)}>
-        <Clear />
-      </IconButton>
+      <Button
+        color="warning"
+        variant="contained"
+        onClick={() => setOpen(!open)}
+        startIcon={<HighlightOff />}
+      >
+        Vaciar tareas
+      </Button>
+
       <Modal
         open={open}
         onClose={handleModalClosed}

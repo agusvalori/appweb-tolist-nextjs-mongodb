@@ -8,29 +8,16 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import React, { useEffect, useState } from "react";
 import { Oregano } from "next/font/google";
 import { useTask } from "@/context/TaskContext";
-import { Edit } from "@mui/icons-material";
+import { AddCircle, Edit } from "@mui/icons-material";
 
 const fontOregano = Oregano({
   weight: "400",
   style: ["italic"],
   subsets: ["latin"],
 });
-
-const iconBtnEditStyled = {
-  backgroundColor: "#f39f5a",
-  color: "white",
-  "&:hover": {
-    transform: "scale(1.2)",
-    backgroundColor: "#f39f5a",
-    color: "white",
-  },
-};
-
-const iconBtnAddStyled = {};
 
 export const TareasAgregarEditar = ({ task, editarTareas }) => {
   const [open, setOpen] = useState(false);
@@ -76,13 +63,33 @@ export const TareasAgregarEditar = ({ task, editarTareas }) => {
 
   return (
     <Box>
-      <IconButton
-        color="success"
-        sx={task ? iconBtnEditStyled : iconBtnAddStyled}
-        onClick={() => setOpen(!open)}
-      >
-        {task ? <Edit /> : <AddIcon />}
-      </IconButton>
+      {task ? (
+        <IconButton
+          color="success"
+          sx={{
+            backgroundColor: "#f39f5a",
+            color: "white",
+            "&:hover": {
+              transform: "scale(1.2)",
+              backgroundColor: "#f39f5a",
+              color: "white",
+            },
+          }}
+          onClick={() => setOpen(!open)}
+        >
+          <Edit />
+        </IconButton>
+      ) : (
+        <Button
+          onClick={() => setOpen(!open)}
+          color="success"
+          startIcon={<AddCircle />}
+          variant="contained"
+        >
+          Agregar
+        </Button>
+      )}
+
       <Modal
         open={open}
         onClose={handleModalClosed}
@@ -90,7 +97,7 @@ export const TareasAgregarEditar = ({ task, editarTareas }) => {
       >
         <form onSubmit={handleSubmit}>
           <Paper
-          elevation={4}
+            elevation={4}
             sx={{
               width: "350px",
               padding: "10px",
