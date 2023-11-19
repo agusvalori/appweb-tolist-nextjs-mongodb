@@ -12,6 +12,17 @@ const GET = async (req) => {
   const token = await getToken({ req, secret });
   const userId = token?.user?._id || false;
 
+  if (!userId) {
+    return NextResponse.json(
+      {
+        message:
+          "No posee los privilegios suficiente para poder ver los articulos",
+        data: null,
+      },
+      { status: 404 }
+    );
+  }
+
   // Consultar las tareas
   const tasks = await Task.find({ authorId: userId });
   return NextResponse.json({

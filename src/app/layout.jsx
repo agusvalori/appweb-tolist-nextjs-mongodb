@@ -8,7 +8,8 @@ export const metadata = {
   description: "Aplicacion de lista de tareas",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout(props) {
+  const { children } = props;
   return (
     <html lang="es">
       <body>

@@ -1,18 +1,23 @@
 "use client";
 import { ExitToApp } from "@mui/icons-material";
 import { Avatar, Box, Button, Paper, Typography } from "@mui/material";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { Oregano } from "next/font/google";
+import { useUser } from "@/context/UserContext";
 const fontOregano = Oregano({
   weight: "400",
   style: ["italic"],
   subsets: ["latin-ext"],
 });
+
+
+
 export const PerfilPage = () => {
-  const { data: session } = useSession();
+  const { user } = useUser();
   const router = useRouter();
+  
 
   const handleSignOut = async () => {
     await signOut({ redirect: false });
@@ -45,7 +50,7 @@ export const PerfilPage = () => {
           <Avatar
             sx={{ width: 90, height: 90 }}
             alt="Avatar"
-            src={session?.user.avatarUrl}
+            src={user.avatarUrl}
           />
         </Box>
         <Box sx={{ textAlign: "center" }}>
@@ -55,16 +60,16 @@ export const PerfilPage = () => {
         </Box>
         <Box sx={{ display: "grid", rowGap: "10px" }}>
           <Typography>
-            <strong>Nombre de Usuario:</strong> {session?.user.username}
+            <strong>Nombre de Usuario:</strong> {user.username}
           </Typography>
           <Typography>
-            <strong>Email:</strong> {session?.user.email}
+            <strong>Email:</strong> {user.email}
           </Typography>
           <Typography>
-            <strong>Nombre:</strong> {session?.user.firstName}
+            <strong>Nombre:</strong> {user.firstName}
           </Typography>
           <Typography>
-            <strong>Apellido:</strong> {session?.user.lastName}
+            <strong>Apellido:</strong> {user.lastName}
           </Typography>
           {/* Agrega más campos según tu modelo de usuario */}
         </Box>

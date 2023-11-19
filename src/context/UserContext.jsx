@@ -1,5 +1,8 @@
 "use client";
-const { createContext, useContext, useState } = require("react");
+
+import { useSession } from "next-auth/react";
+
+const { createContext, useContext, useState, useEffect } = require("react");
 
 const UserContext = createContext();
 
@@ -12,7 +15,21 @@ const useUser = () => {
 };
 
 const UserContextProvider = ({ children }) => {
-  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState([]);
+  const { status, data } = useSession();
+
+  useEffect(() => {
+    console.log("useefect userCOntext")
+    obtenerUsuario();
+  }, [data]);
+
+  const obtenerUsuario = () => {
+    console.log("obtenerUsuario")
+    setUser(data?.user || false);
+  };
+  const isAuthenticated = () => {
+    return status === "authenticated";
+  };
 
   const registrarUsuario = async (usuario) => {
     const result = await fetch("../api/auth/signup", {
@@ -30,7 +47,9 @@ const UserContextProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ users, registrarUsuario }}>
+    <UserContext.Provider
+      value={{ user, obtenerUsuario, registrarUsuario, isAuthenticated }}
+    >
       {children}
     </UserContext.Provider>
   );

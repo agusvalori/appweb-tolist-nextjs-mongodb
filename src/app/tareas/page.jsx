@@ -1,3 +1,4 @@
+import { PagesAuth } from "@/pages/PagesAuth";
 import { TareasPage } from "@/pages/tareas/TareasPage";
 
 export const metadata = {
@@ -7,7 +8,11 @@ export const metadata = {
 };
 
 const Tareas_Page = () => {
-  return <TareasPage />;
+  return (
+    <PagesAuth>
+      <TareasPage />
+    </PagesAuth>
+  );
 };
 
 export default Tareas_Page;

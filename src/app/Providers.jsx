@@ -1,17 +1,21 @@
 "use client";
 
 import { SessionProvider } from "next-auth/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { TaskContextProvider } from "../context/TaskContext";
 import { UserContextProvider } from "../context/UserContext";
 
 const Providers = ({ children }) => {
+  useEffect(() => {
+    console.log("hola ")
+  }, [])
+  
   return (
-    <UserContextProvider>
-      <SessionProvider>
+    <SessionProvider>
+      <UserContextProvider>
         <TaskContextProvider>{children}</TaskContextProvider>
-      </SessionProvider>
-    </UserContextProvider>
+      </UserContextProvider>
+    </SessionProvider>
   );
 };
 

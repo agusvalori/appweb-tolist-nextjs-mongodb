@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { TareasMostrar } from "./mostrar/TareasMostrar";
 import { TareasAgregarEditar } from "./agregarEditar/TareasAgregarEditar";
-import { Box, Paper } from "@mui/material";
+import { Box} from "@mui/material";
 import { TareasVaciarLista } from "./vaciar/TareasVaciarLista";
 import { TareasFiltro } from "./filtro/TareasFiltro";
 import { useTask } from "@/context/TaskContext";

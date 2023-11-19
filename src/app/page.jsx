@@ -1,6 +1,5 @@
 import { InicioPage } from "../pages/inicio/InicioPage";
 
-
 export const metadata = {
   title: "Inicio - Descartables",
   description: "Inicio de  myvdescartables",
@@ -8,10 +7,6 @@ export const metadata = {
 };
 
 const Inicio_Page = () => {
-  return (
-    <div>
-      <InicioPage />
-    </div>
-  );
+  return <InicioPage />;
 };
 export default Inicio_Page;

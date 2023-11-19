@@ -26,7 +26,6 @@ export const SignInPageForm = () => {
     if (error) {
       return alert(error);
     }
-    router.push("/");
   };
 
   return (

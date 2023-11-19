@@ -8,7 +8,7 @@ const connectDB = async () => {
 
   const db = await connect(DATABASE_URL);
   conn.isConnected = db.connections[0].readyState;
-  console.log("Base de datos conectada: ", db.connection.name);
+  console.log("Base de datos conectada: *", db.connection.name);
 };
 
 connection.on("connected", () => {

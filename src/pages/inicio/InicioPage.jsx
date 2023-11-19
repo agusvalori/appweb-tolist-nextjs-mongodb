@@ -1,11 +1,11 @@
 "use client";
-import { Box, Container, Paper, Stack, Typography } from "@mui/material";
-import { useSession } from "next-auth/react";
+import { useUser } from "@/context/UserContext";
+import { Box, Container, Paper, Typography } from "@mui/material";
 import React from "react";
 
 export const InicioPage = () => {
-  const { data } = useSession();
-  const user = data?.user || false;
+  const { user } = useUser();
+
   return (
     <Container
       sx={{
