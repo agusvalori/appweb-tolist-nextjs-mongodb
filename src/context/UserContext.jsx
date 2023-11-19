@@ -19,7 +19,6 @@ const UserContextProvider = ({ children }) => {
   const { status, data } = useSession();
 
   useEffect(() => {
-    console.log("useefect userCOntext")
     obtenerUsuario();
   }, [data]);
 

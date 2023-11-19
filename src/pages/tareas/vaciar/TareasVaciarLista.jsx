@@ -46,7 +46,7 @@ export const TareasVaciarLista = () => {
           <Box sx={{ textAlign: "center" }}>
             <Typography>Esta Seguro de:</Typography>
             <Typography>querer eliminar todas las tareas</Typography>
-            <Typography>Se eliminaran: {tasks.length} tareas</Typography>
+            <Typography>Se eliminaran: {tasks?.length || ""} tareas</Typography>
           </Box>
           <Box
             sx={{

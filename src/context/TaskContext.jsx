@@ -1,5 +1,7 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+
+import { useSession } from "next-auth/react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const TaskContext = createContext();
 
@@ -13,6 +15,11 @@ const useTask = () => {
 
 const TaskContextProvider = (props) => {
   const [tasks, setTasks] = useState([]);
+  const { data: userData } = useSession();
+
+  useEffect(() => {
+    obtenerTareas();
+  }, [userData]);
 
   const crearTareas = async (data) => {
     const result = await fetch("../api/task", {
@@ -90,4 +97,3 @@ const TaskContextProvider = (props) => {
 };
 
 export { TaskContext, TaskContextProvider, useTask };
-

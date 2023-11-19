@@ -17,7 +17,7 @@ const fontIndieFlower = Indie_Flower({
 });
 
 export const TareasMostrarCard = ({ task }) => {
-  const { title, description, status } = task;
+  const { title="", description="", status="" } = task;
 
   const { editarTareas, eliminarTareaById } = useTask();
 

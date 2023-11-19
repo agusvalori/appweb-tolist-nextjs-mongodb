@@ -9,11 +9,9 @@ import { useTask } from "@/context/TaskContext";
 
 export const TareasPage = () => {
   const [taskList, setTaskList] = useState([]);
-  const { obtenerTareas, tasks } = useTask();
+  const {  tasks } = useTask();
 
-  useEffect(() => {
-    obtenerTareas();
-  }, []);
+
 
   useEffect(() => {
     setTaskList(tasks);

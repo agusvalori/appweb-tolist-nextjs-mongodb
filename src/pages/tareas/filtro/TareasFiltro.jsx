@@ -27,10 +27,10 @@ export const TareasFiltro = ({ tasks, setTaskList }) => {
         setTaskList(tasks);
         break;
       case "realizadas":
-        setTaskList(tasks.filter((task) => task.status));
+        setTaskList(tasks.filter((task) => task?.status));
         break;
       case "noRealizadas":
-        setTaskList(tasks.filter((task) => !task.status));
+        setTaskList(tasks.filter((task) => !task?.status));
         break;
       default:
         setTaskList(tasks);
@@ -40,9 +40,9 @@ export const TareasFiltro = ({ tasks, setTaskList }) => {
 
   const obtenerCountTask = () => {
     setCountTask({
-      todas: tasks.length,
-      realizadas: tasks.filter((task) => task.status).length,
-      noRealizadas: tasks.filter((task) => !task.status).length,
+      todas: tasks?.length,
+      realizadas: tasks?.filter((task) => task.status).length,
+      noRealizadas: tasks?.filter((task) => !task.status).length,
     });
   };
   useEffect(() => {
